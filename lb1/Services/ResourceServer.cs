@@ -42,7 +42,6 @@ namespace lb1.Services
             {
                 _logger.LogInformation($"Resource with id = {id} wosn't found");
             }
-
             return result?.Data;
         }
 

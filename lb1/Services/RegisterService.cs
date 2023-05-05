@@ -33,6 +33,7 @@ namespace lb1.Services
         public async Task<RegisterResponse> Register( string email, string password)
         {
             var result = await _httpClientService.GetAsync<AccountRequest>(
+
             $"{_options.Host}{_registerApi}/",
             HttpMethod.Post,
             new AccountRequest()
@@ -51,6 +52,8 @@ namespace lb1.Services
             }
 
             return response;
+
+           
         }
     }
 }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace lb1.Dtos.Responses.Account
 {
-    public class LoginResponse: IAccountResponse
+    public class LoginResponse : IAccountResponse
     {
         public string? Token { get; set; }
-        public string? Error { get; set ; }
+        public string? Error { get; set; }
     }
 }

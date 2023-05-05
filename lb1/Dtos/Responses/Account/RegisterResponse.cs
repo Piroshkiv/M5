@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace lb1.Dtos.Responses.Account
 {
-    public class RegisterResponse:IAccountResponse
+
+    public class RegisterResponse : IAccountResponse
     {
         public int? Id { get; set; }
         public string? Token { get; set; }

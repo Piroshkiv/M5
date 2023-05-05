@@ -42,6 +42,7 @@ public class UserService : IUserService
             _logger.LogInformation($"User with id = {id} wosn't found");
         }
         return result?.Data;
+
     }
 
     public async Task<UserResponseCreate> CreateUser(string name, string job)
@@ -59,7 +60,6 @@ public class UserService : IUserService
         {
             _logger.LogInformation($"User with id = {result?.Id} was created");
         }
-
 
         return result;
     }
