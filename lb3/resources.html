@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Resources</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+       document.addEventListener("DOMContentLoaded", function () {
+        const cardsPerPage = 3; // Change this value to set the number of cards per page
+        const cardRow = document.getElementById("card-row");
+        const previousBtn = document.getElementById("previous-btn");
+        const nextBtn = document.getElementById("next-btn");
+        const pagination = document.getElementById("pages");
+
+        let currentPage = 1;
+        let totalPages = Math.ceil(cardRow.children.length / cardsPerPage);
+
+        function updatePagination() {
+          Array.from(pagination.children).forEach((li) =>
+            li.classList.remove("active")
+          );
+          pagination.children[currentPage - 1].classList.add("active");
+
+          if (currentPage === 1) {
+            previousBtn.classList.add("disabled");
+          } else {
+            previousBtn.classList.remove("disabled");
+          }
+
+          if (currentPage === totalPages) {
+            nextBtn.classList.add("disabled");
+          } else {
+            nextBtn.classList.remove("disabled");
+          }
+        }
+
+        function showCards() {
+          for (let i = 0; i < cardRow.children.length; i++) {
+            console.log(cardRow.children.length);
+
+            if (
+              i < (currentPage - 1) * cardsPerPage ||
+              i >= currentPage * cardsPerPage
+            ) {
+              cardRow.children[i].classList.add("d-none");
+            } else {
+              cardRow.children[i].classList.remove("d-none");
+            }
+          }
+        }
+
+        function addPagination() {
+          for (var i = 1; i <= totalPages; i++) {
+            var li = document.createElement("li");
+            li.classList.add("page-item");
+
+            var a = document.createElement("a");
+            a.classList.add("page-link");
+            a.href = "#";
+            a.setAttribute("data-page", i);
+            a.textContent = i;
+
+            li.appendChild(a);
+
+            pagination.insertBefore(li, pagination.lastElementChild);
+          }
+        }
+
+        addPagination();
+
+        previousBtn.addEventListener("click", () => {
+          if (currentPage > 1) {
+            currentPage--;
+            updatePagination();
+            showCards();
+          }
+        });
+
+        nextBtn.addEventListener("click", () => {
+          if (currentPage < totalPages) {
+            currentPage++;
+            updatePagination();
+            showCards();
+          }
+        });
+
+        Array.from(pagination.children).forEach((li) => {
+          li.firstChild.addEventListener("click", (event) => {
+            event.preventDefault();
+            currentPage = parseInt(event.target.dataset.page);
+            updatePagination();
+            showCards();
+          });
+        });
+
+        updatePagination();
+        showCards();
+      });
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img
+            src="logo.png"
+            alt=""
+            width="30"
+            height="24"
+            class="d-inline-block align-text-top"
+          />
+          My website
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="index.html"
+                >Users</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="resources.html">Resources</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container mt-3">
+      <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            data-bs-toggle="tab"
+            data-bs-target="#tab-home"
+          >
+            Data
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            data-bs-toggle="tab"
+            data-bs-target="#tab-resources"
+          >
+            Input
+          </a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="tab-home">
+          <div class="row" id="card-row">
+
+            <div class="col">
+              <div class="card" style="background-color: #98b2d1">
+                <div class="card-body">
+                  <h5 class="card-title">cerulean</h5>
+                  <span class="card-text">2000</span>
+                  <p class="card-text">#98B2D1</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card" style="background-color: #C74375">
+                <div class="card-body">
+                  <h5 class="card-title">fuchsia rose</h5>
+                  <span class="card-text">2001</span>
+                  <p class="card-text">#C74375</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card" style="background-color: #BF1932">
+                <div class="card-body">
+                  <h5 class="card-title">true red</h5>
+                  <span class="card-text">2002</span>
+                  <p class="card-text">#BF1932</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card" style="background-color: #7BC4C4">
+                <div class="card-body">
+                  <h5 class="card-title">aqua sky</h5>
+                  <span class="card-text">2003</span>
+                  <p class="card-text">#7BC4C4</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card" style="background-color: #E2583E">
+                <div class="card-body">
+                  <h5 class="card-title">tigerlily</h5>
+                  <span class="card-text">2004</span>
+                  <p  class="card-text">#E2583E</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card" style="background-color: #53B0AE">
+                <div class="card-body">
+                  <h5 class="card-title">turquoise</h5>
+                  <span class="card-text">2005</span>
+                  <p  class="card-text">#53B0AE</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card" style="background-color: #DECDBE">
+                <div class="card-body">
+                  <h5 class="card-title">sand dollar</h5>
+                  <span class="card-text">2006</span>
+                  <p class="card-text">#DECDBE</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <nav>
+            <ul id="pages" class="pagination justify-content-center mt-3">
+              <li class="page-item disabled" id="previous-btn">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+              </li>
+              <!-- <li class="page-item active">
+                <a class="page-link" href="#" data-page="1">1</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#" data-page="2">2</a>
+              </li> -->
+              <li class="page-item" id="next-btn">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="tab-pane fade" id="tab-resources">
+          <form class="needs-validation">
+            <div class="mb-3">
+              <label for="resourceName" class="form-label">Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="resourceName" 
+                required 
+              />
+              <div class="invalid-feedback">Please provide a name.</div>
+            </div>
+            <div class="mb-3">
+              <label for="resourceYear" class="form-label">Year:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="resourceYear"
+                required
+              />
+              <div class="invalid-feedback">Please provide a year.</div>
+            </div>
+            <div class="mb-3">
+              <label for="resourceColor" class="form-label p-1">Color:</label>
+              <input
+                type="color"
+                class="form-control"
+                id="resourceColor"
+                required
+              />
+              <div class="invalid-feedback">Please provide a valid email.</div>
+            </div>
+            <div class="mb-3">
+              <label for="resourcePantoneValue" class="form-label">Pantone value: </label>
+              <input
+                type="text"
+                class="form-control"
+                id="resourcePantoneValue"
+                required
+              />
+              <div class="invalid-feedback">Please provide a password.</div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>
