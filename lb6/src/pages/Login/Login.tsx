@@ -67,6 +67,7 @@ const Login = () => {
                         'Submit'
                     )}
                 </Button>
+                <p className="mt-3 mb-3" style={{ color: 'black', fontSize: 14, fontWeight: 700 }}>Don't have an account? <a href="/Register">Sing up</a></p>
                 {!!appStore.authStore.token && (
                     <p className="mt-3 mb-3" style={{ color: 'green', fontSize: 14, fontWeight: 700 }}>{`Success! Token is: ${appStore.authStore.token}`}</p>
                 )}

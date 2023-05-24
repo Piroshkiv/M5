@@ -1,3 +1,21 @@
 p{
     color: rgb(0, 0, 255);
 }
+
+.holder{
+    a[href^='https']{
+        color:rgb(255, 0, 0)
+    }
+    .list>li:last-of-type {
+        a{
+            background-color:green;
+        }
+       
+
+    }
+    ul~p{
+        font-size: 26px;
+    }    
+
+
+}
