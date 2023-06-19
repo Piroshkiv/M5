@@ -62,4 +62,13 @@ public class CatalogBrandRepository : ICatalogBrandRepository
 
         return item.Entity.Id;
     }
+
+    public async Task<IEnumerable<CatalogBrand>> GetBrandsAsync()
+    {
+        var items = await _dbContext.CatalogBrands
+            .OrderBy(c => c.Brand)
+            .ToListAsync();
+
+        return items;
+    }
 }

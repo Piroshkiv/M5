@@ -3,6 +3,7 @@ using Catalog.Host.Configurations;
 using Catalog.Host.Data;
 using Catalog.Host.Models.Dtos;
 using Catalog.Host.Models.Response;
+using Catalog.Host.Repositories;
 using Catalog.Host.Repositories.Interfaces;
 using Catalog.Host.Services.Interfaces;
 
@@ -106,6 +107,26 @@ public class CatalogService : BaseDataService<ApplicationDbContext>, ICatalogSer
                 PageIndex = pageIndex,
                 PageSize = pageSize
             };
+        });
+    }
+
+    public async Task<IEnumerable<CatalogBrandDto>> GetBrandsAsync()
+    {
+        return await ExecuteSafeAsync(async () =>
+        {
+            var result = await _catalogBrandRepository.GetBrandsAsync();
+
+            return result.Select(s => _mapper.Map<CatalogBrandDto>(s));
+        });
+    }
+
+    public async Task<IEnumerable<CatalogTypeDto>> GetTypesAsync()
+    {
+        return await ExecuteSafeAsync(async () =>
+        {
+            var result = await _catalogTypeRepository.GetTypesAsync();
+
+            return result.Select(s => _mapper.Map<CatalogTypeDto>(s));
         });
     }
 }

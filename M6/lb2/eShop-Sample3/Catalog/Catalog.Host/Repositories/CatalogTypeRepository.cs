@@ -62,4 +62,13 @@ public class CatalogTypeRepository : ICatalogTypeRepository
 
         return item.Entity.Id;
     }
+
+    public async Task<IEnumerable<CatalogType>> GetTypesAsync()
+    {
+        var items = await _dbContext.CatalogTypes
+            .OrderBy(c => c.Type)
+            .ToListAsync();
+
+        return items;
+    }
 }

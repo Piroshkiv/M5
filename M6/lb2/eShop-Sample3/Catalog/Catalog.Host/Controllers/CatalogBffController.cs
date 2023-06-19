@@ -33,22 +33,6 @@ public class CatalogBffController : ControllerBase
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(PaginatedDataResponse<CatalogTypeDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Types(PaginatedDataRequest request)
-    {
-        var result = await _catalogService.GetCatalogTypesAsync(request.PageSize, request.PageIndex);
-        return Ok(result);
-    }
-
-    [HttpPost]
-    [ProducesResponseType(typeof(PaginatedDataResponse<CatalogBrandDto>), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Brands(PaginatedDataRequest request)
-    {
-        var result = await _catalogService.GetCatalogBrandsAsync(request.PageSize, request.PageIndex);
-        return Ok(result);
-    }
-
-    [HttpPost]
     [ProducesResponseType(typeof(GetItemResponse), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> ItemById(GetItemByIdRequest request)
     {
@@ -69,6 +53,22 @@ public class CatalogBffController : ControllerBase
     public async Task<IActionResult> ItemByType(GetItemsByTypeRequest request)
     {
         var result = await _catalogService.GetByTypeAsync(request.Type);
+        return Ok(result);
+    }
+
+    [HttpPost]
+    [ProducesResponseType(typeof(IEnumerable<CatalogBrandDto>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> Brands()
+    {
+        var result = await _catalogService.GetBrandsAsync();
+        return Ok(result);
+    }
+
+    [HttpPost]
+    [ProducesResponseType(typeof(IEnumerable<CatalogBrandDto>), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> Types()
+    {
+        var result = await _catalogService.GetTypesAsync();
         return Ok(result);
     }
 }
