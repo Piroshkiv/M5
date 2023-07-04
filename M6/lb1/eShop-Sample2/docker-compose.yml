@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  catalog.api:
+    build:
+      context: .
+      dockerfile: Catalog/Catalog.Host/Dockerfile
+    environment:
+       - ASPNETCORE_ENVIRONMENT=Development
+       - ASPNETCORE_URLS=http://+:5000
+    ports:
+      - 5000:5000
+  resource.api:
+    build:
+      context: .
+      dockerfile: Catalog.Resource/Dockerfile
+    environment:
+       - ASPNETCORE_ENVIRONMENT=Development
+       - ASPNETCORE_URLS=http://+:5001
+    ports:
+      - 5001:5001
+
+networks:
+  default:
+    driver: bridge
+    internal: false
+    attachable: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.0.4/24
+          gateway: 192.168.0.4
