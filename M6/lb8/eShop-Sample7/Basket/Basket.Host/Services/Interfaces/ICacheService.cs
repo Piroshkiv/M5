@@ -11,6 +11,7 @@ namespace Basket.Host.Services.Interfaces
         Task<bool> RemoveProductAsync(string key, int value);
         Task<BasketProductDto?> IncrementProductAsync(string key, int value);
         Task<BasketProductDto?> DecrementProductAsync(string key, int value);
+        Task<BasketProductDto?> GetProductByIdAsync(string key, int id);
         void Log(string message);
     }
 }

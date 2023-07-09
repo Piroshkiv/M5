@@ -27,7 +27,7 @@ public class CatalogTypeRepository : ICatalogTypeRepository
         });
 
         await _dbContext.SaveChangesAsync();
-
+        _logger.LogInformation($"type {item.Entity.Id} was added");
         return item.Entity.Id;
     }
 
@@ -35,6 +35,7 @@ public class CatalogTypeRepository : ICatalogTypeRepository
     {
         _dbContext.Remove(new CatalogType { Id = id });
         await _dbContext.SaveChangesAsync();
+        _logger.LogInformation($"type {id} was removed");
     }
 
     public async Task<int?> UpdateAsync(int id, string type)
@@ -46,7 +47,7 @@ public class CatalogTypeRepository : ICatalogTypeRepository
         });
 
         await _dbContext.SaveChangesAsync();
-
+        _logger.LogInformation($"type {id} was updeted");
         return item.Entity.Id;
     }
 

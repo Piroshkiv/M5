@@ -12,6 +12,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
+using System.Net.Http;
 
 namespace Infrastructure.RateLimit.RateLimit
 {
@@ -30,8 +32,9 @@ namespace Infrastructure.RateLimit.RateLimit
             var httpContext = context.HttpContext!;
 
             var routeEndpoint = httpContext.GetEndpoint();
+            var ip = httpContext.Connection.RemoteIpAddress.ToString();
 
-            var key = $"{routeEndpoint}";
+            var key = $"{ip}";
             var currentRequestCount = redisDb.StringIncrement(key);
 
             if(currentRequestCount == 1)

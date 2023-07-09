@@ -36,7 +36,6 @@ builder.Services.AddSwaggerGen(options =>
                 Scopes = new Dictionary<string, string>()
                 {
                     { "mvc", "website" },
-                    { "basket.basketbff", "basket.basketbff" },
                     { "basket.basketproduct", "basket.basketproduct" }
                 }
             }

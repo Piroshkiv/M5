@@ -30,7 +30,6 @@ namespace IdentityServer
                 {
                     Scopes = new List<Scope>
                     {
-                        new Scope("catalog.catalogbff"),
                         new Scope("catalog.catalogitem"),
                         new Scope("catalog.catalogtype"),
                         new Scope("catalog.catalogbrand"),
@@ -40,7 +39,6 @@ namespace IdentityServer
                 {
                     Scopes = new List<Scope>
                     {
-                        new Scope("basket.basketbff"),
                         new Scope("basket.basketproduct")
                     },
                 }
@@ -100,7 +98,7 @@ namespace IdentityServer
 
                     AllowedScopes =
                     {
-                        "mvc", "catalog.catalogbff", "catalog.catalogitem", "catalog.catalogtype", "catalog.catalogbrand"
+                        "mvc", "catalog.catalogitem", "catalog.catalogtype", "catalog.catalogbrand"
                     }
                 },
                 new Client
@@ -115,7 +113,7 @@ namespace IdentityServer
 
                     AllowedScopes =
                     {
-                        "mvc", "basket.basketbff", "basket.basketproduct"
+                        "mvc", "basket.basketproduct"
                     }
                 },
             };

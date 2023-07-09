@@ -32,13 +32,23 @@ public class BasketBffController : ControllerBase
         return Ok();
     }
 
-    [HttpPost]
-    [ProducesResponseType(typeof(GetProductsResponse), (int)HttpStatusCode.OK)]
+    [HttpGet]
+    [ProducesResponseType(typeof(ProductsResponse), (int)HttpStatusCode.OK)]
     [RateLimitFilter(60, 10)]
-    public async Task<IActionResult> GetBasket()
+    public async Task<IActionResult> Basket()
     {
         var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
         var response = await _basketService.GetAsync(basketId!);
         return Ok(response);
     }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(ProductsResponse), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> BasketById(int id)
+    {
+        var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+        var response = await _basketService.GetProductByIdAsync(basketId!, id);
+        return Ok(response);
+    }
+
 }

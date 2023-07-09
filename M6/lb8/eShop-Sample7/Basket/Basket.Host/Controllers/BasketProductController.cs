@@ -33,4 +33,40 @@ public class BasketProductController : ControllerBase
         var response = await _basketService.AddAsync(basketId!, data);
         return Ok(response);
     }
+
+    [HttpDelete]
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> ClearAll()
+    {
+        var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+        var response = await _basketService.ClearAsync(basketId!);
+        return Ok(response);
+    }
+
+    [HttpDelete]
+    [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> Remove(int id)
+    {
+        var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+        var response = await _basketService.RemoveProductAsync(basketId!, id);
+        return Ok(response);
+    }
+
+    [HttpPost]
+    [ProducesResponseType(typeof(ProductsResponse), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> Increment(int id)
+    {
+        var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+        var response = await _basketService.IncrementProductAsync(basketId!, id);
+        return Ok(response);
+    }
+
+    [HttpPost]
+    [ProducesResponseType(typeof(ProductsResponse), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> Decrement(int id)
+    {
+        var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+        var response = await _basketService.DecrementProductAsync(basketId!, id);
+        return Ok(response);
+    }
 }

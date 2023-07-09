@@ -27,7 +27,7 @@ public class CatalogBrandRepository : ICatalogBrandRepository
         });
 
         await _dbContext.SaveChangesAsync();
-
+        _logger.LogInformation($"brand {item.Entity.Id} was added");
         return item.Entity.Id;
     }
 
@@ -35,6 +35,7 @@ public class CatalogBrandRepository : ICatalogBrandRepository
     {
         _dbContext.Remove(new CatalogBrand { Id = id });
         await _dbContext.SaveChangesAsync();
+        _logger.LogInformation($"brand {id} was removed");
     }
 
     public async Task<int?> UpdateAsync(int id, string brand)
@@ -46,7 +47,7 @@ public class CatalogBrandRepository : ICatalogBrandRepository
         });
 
         await _dbContext.SaveChangesAsync();
-
+        _logger.LogInformation($"brand {item.Entity.Id} was updeted");
         return item.Entity.Id;
     }
 

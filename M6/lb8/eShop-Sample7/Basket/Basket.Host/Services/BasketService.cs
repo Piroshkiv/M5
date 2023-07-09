@@ -37,16 +37,21 @@ public class BasketService : IBasketService
         return await _cacheService.DecrementProductAsync(key, value);
     }
 
-    public async Task<GetProductsResponse> GetAsync(string key)
+    public async Task<ProductsResponse> GetAsync(string key)
     {
         var result = await _cacheService.GetAsync(key);
 
         if(result == null)
         {
-            return default(GetProductsResponse)!;
+            return default(ProductsResponse)!;
         }
 
-        return new GetProductsResponse {  Products = result.Products, Size  = result.Size };
+        return new ProductsResponse {  Products = result.Products, Size  = result.Size };
+    }
+
+    public Task<BasketProductDto?> GetProductByIdAsync(string key, int id)
+    {
+        throw new NotImplementedException();
     }
 
     public async Task<BasketProductDto?> IncrementProductAsync(string key, int value)
@@ -61,6 +66,6 @@ public class BasketService : IBasketService
 
     public async Task<bool> RemoveProductAsync(string key, int value)
     {
-        return await _cacheService.RemoveProductAsync(key, value);
+        return await _cacheService.RemoveProductAsync(key,value);
     }
 }

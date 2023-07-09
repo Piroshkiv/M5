@@ -59,7 +59,7 @@ public class CatalogItemRepository : ICatalogItemRepository
         });
 
         await _dbContext.SaveChangesAsync();
-
+        _logger.LogInformation($"item {item.Entity.Id} was added");
         return item.Entity.Id;
     }
 
@@ -67,6 +67,7 @@ public class CatalogItemRepository : ICatalogItemRepository
     {
         _dbContext.Remove(new CatalogItem { Id = id });
         await _dbContext.SaveChangesAsync();
+        _logger.LogInformation($"item {id} was removed");
     }
 
     public async Task<int?> UpdateAsync(int id, string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName)
@@ -83,7 +84,7 @@ public class CatalogItemRepository : ICatalogItemRepository
         });
 
         await _dbContext.SaveChangesAsync();
-
+        _logger.LogInformation($"item {id} was updated");
         return item.Entity.Id;
     }
 

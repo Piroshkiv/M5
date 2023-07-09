@@ -34,7 +34,7 @@ public class CatalogService : ICatalogService
         }
         
         var result = await _httpClient.SendAsync<Catalog, PaginatedItemsRequest<CatalogTypeFilter>>($"{_settings.Value.CatalogUrl}/items",
-           HttpMethod.Post, 
+           HttpMethod.Get, 
            new PaginatedItemsRequest<CatalogTypeFilter>()
             {
                 PageIndex = page,
@@ -48,7 +48,7 @@ public class CatalogService : ICatalogService
     public async Task<IEnumerable<SelectListItem>> GetBrands()
     {
         var result = await _httpClient.SendAsync<IEnumerable<CatalogBrand>, object?>($"{_settings.Value.CatalogUrl}/brands",
-                   HttpMethod.Post,
+                   HttpMethod.Get,
                    null);
 
         return result.Select(r => new SelectListItem() { Value = r.Id.ToString(), Text = r.Brand });
@@ -57,9 +57,18 @@ public class CatalogService : ICatalogService
     public async Task<IEnumerable<SelectListItem>> GetTypes()
     {
         var result = await _httpClient.SendAsync<IEnumerable<CatalogType>, object?>($"{_settings.Value.CatalogUrl}/types",
-                   HttpMethod.Post,
+                   HttpMethod.Get,
                    null);
 
         return result.Select(r => new SelectListItem() { Value = r.Id.ToString(), Text = r.Type });
+    }
+
+    public async Task<CatalogItem> GetItemById(int id)
+    {
+        var result = await _httpClient.SendAsync<CatalogItem, object?>($"{_settings.Value.CatalogUrl}/itemById",
+                   HttpMethod.Get,
+                   id);
+
+        return result;
     }
 }

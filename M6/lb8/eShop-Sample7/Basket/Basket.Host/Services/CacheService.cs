@@ -37,6 +37,9 @@ namespace Basket.Host.Services
             => await IncrementProductInternalAsync(key, value);
         public async Task<BasketProductDto?> DecrementProductAsync(string key, int value)
             => await DecrementProductInternalAsync(key, value);
+        public async Task<BasketProductDto?> GetProductByIdAsync(string key, int id)
+            => await GetProductByIdInternalAsync(key, id);
+
         public async Task<BasketDto> GetAsync(string key)
         {
             var redis = GetRedisDatabase();
@@ -188,6 +191,28 @@ IDatabase redis = null!, TimeSpan? expiry = null)
             await redis.StringSetAsync(cacheKey, serialized, expiry);
 
             return product;
+        }
+
+        private async Task<BasketProductDto?> GetProductByIdInternalAsync(string key, int id,
+IDatabase redis = null!, TimeSpan? expiry = null)
+        {
+            redis = redis ?? GetRedisDatabase();
+            expiry = expiry ?? _config.CacheTimeout;
+
+            var cacheKey = GetItemCacheKey(key);
+
+            var serialized = await redis.StringGetAsync(cacheKey);
+
+            _logger.LogInformation(serialized.ToString());
+
+            var deserialized = serialized.HasValue ?
+                _jsonSerializer.Deserialize<BasketDto>(serialized.ToString())
+                : new BasketDto() { Products = new List<BasketProductDto>(), Size = 0 };
+
+            if (!deserialized.Products.Any(p => p.Product!.Equals(id)))
+                return null;
+
+            return deserialized.Products.FirstOrDefault(p => p.Product.Equals(id));
         }
 
         public void Log(string message)

@@ -75,7 +75,7 @@ namespace Basket.UnitTests.Services
             // arrange
             var testKey = "1";
             var testBasketDto = new BasketDto() { Products = new List<BasketProductDto>(), Size = 0 };
-            var testResponse = new GetProductsResponse() { Products = new List<BasketProductDto>(), Size = 0 };
+            var testResponse = new ProductsResponse() { Products = new List<BasketProductDto>(), Size = 0 };
 
             _cacheService.Setup(s => s.GetAsync(It.IsAny<string>())).ReturnsAsync(testBasketDto);
 
