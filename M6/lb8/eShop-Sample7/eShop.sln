@@ -69,6 +69,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.UnitTests", "Basket\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.RateLimit", "Infrastructure\Infrastructure.RateLimit\Infrastructure.RateLimit.csproj", "{DF5A3C05-D48A-413E-B5D9-E721F337B664}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order", "Order", "{77A06FB8-5267-425E-BBFA-7804419C73EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Host", "Order\Order.Host\Order.Host.csproj", "{76131AE3-8FEF-49DA-82CB-7298EED750A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +115,10 @@ Global
 		{DF5A3C05-D48A-413E-B5D9-E721F337B664}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF5A3C05-D48A-413E-B5D9-E721F337B664}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF5A3C05-D48A-413E-B5D9-E721F337B664}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76131AE3-8FEF-49DA-82CB-7298EED750A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76131AE3-8FEF-49DA-82CB-7298EED750A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76131AE3-8FEF-49DA-82CB-7298EED750A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76131AE3-8FEF-49DA-82CB-7298EED750A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,6 +138,7 @@ Global
 		{66EEAED5-1742-4671-8797-9CDEB8C5F6FB} = {E3A29E2D-4EAF-4981-990E-731D1E3578F5}
 		{B997F664-002C-4CB7-8588-3427D7DF12BF} = {E3A29E2D-4EAF-4981-990E-731D1E3578F5}
 		{DF5A3C05-D48A-413E-B5D9-E721F337B664} = {A6C7B2CD-2199-497C-9EF5-32274390D2D7}
+		{76131AE3-8FEF-49DA-82CB-7298EED750A9} = {77A06FB8-5267-425E-BBFA-7804419C73EC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0313C6B0-B589-48AC-8690-AAA49BB0B196}

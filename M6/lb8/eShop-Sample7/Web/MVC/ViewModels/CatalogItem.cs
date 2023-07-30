@@ -1,4 +1,5 @@
-﻿namespace MVC.ViewModels;
+﻿using MVC.ViewModels.Basket;
+namespace MVC.ViewModels;
 
 public record CatalogItem
 {
@@ -17,4 +18,6 @@ public record CatalogItem
     public CatalogBrand CatalogBrand { get; set; } = null!;
 
     public int AvailableStock { get; set; }
+
+    public BasketProduct BasketProduct { get; set; } = null!;
 }

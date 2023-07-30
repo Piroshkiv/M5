@@ -23,7 +23,7 @@ public class CatalogTypeController : ControllerBase
         _catalogTypeService = catalogTypeService;
     }
 
-    [HttpPost]
+    [HttpPut]
     [ProducesResponseType(typeof(AddDataResponse<int?>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> Add(CreateTypeRequest request)
     {
@@ -31,7 +31,7 @@ public class CatalogTypeController : ControllerBase
         return Ok(new AddDataResponse<int?>() { Id = result });
     }
 
-    [HttpPost]
+    [HttpDelete]
     public async Task<IActionResult> Delete(DeleteDataRequest request)
     {
         await _catalogTypeService.DeleteAsync(request.Id);

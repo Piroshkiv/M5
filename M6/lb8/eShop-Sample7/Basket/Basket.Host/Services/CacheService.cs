@@ -50,7 +50,7 @@ namespace Basket.Host.Services
 
             if (!serialized.HasValue)
             {
-                return null!;
+                return new BasketDto { Products = new List<BasketProductDto>(), Size = 0  };
             }
 
             var deserialized = _jsonSerializer.Deserialize<BasketDto>(serialized.ToString());
@@ -80,8 +80,6 @@ namespace Basket.Host.Services
             var cacheKey = GetItemCacheKey(key);
 
             var serialized = await redis.StringGetAsync(cacheKey);
-
-            _logger.LogInformation(serialized.ToString());
 
             var deserialized = serialized.HasValue ?
                 _jsonSerializer.Deserialize<BasketDto>(serialized.ToString())
@@ -145,14 +143,18 @@ namespace Basket.Host.Services
 
             _logger.LogInformation(serialized.ToString());
 
-            var deserialized = serialized.HasValue ?
-                _jsonSerializer.Deserialize<BasketDto>(serialized.ToString())
-                : new BasketDto() { Products = new List<BasketProductDto>(), Size = 0 };
-
-            if (!deserialized.Products.Any(p => p.Product!.Equals(value)))
+            if (!serialized.HasValue)
+            {
                 return null;
+            }
 
-            var product = deserialized.Products.Single(p => p.Product!.Equals(value));
+            var deserialized = _jsonSerializer.Deserialize<BasketDto>(serialized.ToString());
+            var product = deserialized.Products.FirstOrDefault(p => p.Product!.Equals(value));
+
+            if (product == null)
+            {
+                return null;
+            }
 
             product.Quantity++;
 
@@ -175,14 +177,18 @@ IDatabase redis = null!, TimeSpan? expiry = null)
 
             _logger.LogInformation(serialized.ToString());
 
-            var deserialized = serialized.HasValue ?
-                _jsonSerializer.Deserialize<BasketDto>(serialized.ToString())
-                : new BasketDto() { Products = new List<BasketProductDto>(), Size = 0 };
-
-            if (!deserialized.Products.Any(p => p.Product!.Equals(value)))
+            if (!serialized.HasValue)
+            {
                 return null;
+            }
 
-            var product = deserialized.Products.Single(p => p.Product!.Equals(value));
+            var deserialized = _jsonSerializer.Deserialize<BasketDto>(serialized.ToString());
+            var product = deserialized.Products.FirstOrDefault(p => p.Product!.Equals(value));
+
+            if (product == null)
+            {
+                return null;
+            }
 
             product.Quantity--;
 

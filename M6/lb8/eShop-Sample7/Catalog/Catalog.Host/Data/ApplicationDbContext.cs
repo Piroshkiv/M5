@@ -3,7 +3,7 @@ using Catalog.Host.Data.EntityConfigurations;
 
 namespace Catalog.Host.Data;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : Microsoft.EntityFrameworkCore.DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)

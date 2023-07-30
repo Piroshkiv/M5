@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading;
+using Catalog.Host.Data;
 using Catalog.Host.Data.Entities;
 using Catalog.Host.Models.Dtos;
 using Catalog.Host.Models.Response;

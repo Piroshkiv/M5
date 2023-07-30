@@ -1,4 +1,4 @@
-﻿using System.Threading;
+﻿using Catalog.Host.Data;
 using Catalog.Host.Data.Entities;
 
 namespace Catalog.UnitTests.Services
@@ -8,7 +8,7 @@ namespace Catalog.UnitTests.Services
         private readonly ICatalogBrandService _catalogService;
 
         private readonly Mock<ICatalogBrandRepository> _catalogBrandRepository;
-        private readonly Mock<Host.Services.Interfaces.IDbContextWrapper<ApplicationDbContext>> _dbContextWrapper;
+        private readonly Mock<IDbContextWrapper<ApplicationDbContext>> _dbContextWrapper;
         private readonly Mock<ILogger<CatalogService>> _logger;
 
         private readonly CatalogBrand _testBrand = new CatalogBrand()
@@ -20,7 +20,7 @@ namespace Catalog.UnitTests.Services
         public CatalogBrandServiceTest()
         {
             _catalogBrandRepository = new Mock<ICatalogBrandRepository>();
-            _dbContextWrapper = new Mock<Host.Services.Interfaces.IDbContextWrapper<ApplicationDbContext>>();
+            _dbContextWrapper = new Mock<IDbContextWrapper<ApplicationDbContext>>();
             _logger = new Mock<ILogger<CatalogService>>();
 
             var dbContextTransaction = new Mock<IDbContextTransaction>();

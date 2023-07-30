@@ -1,0 +1,37 @@
+﻿@model MVC.ViewModels.CatalogItem
+
+<form>
+    <div class="row">
+        <div class="col-6 align-self-center d-flex">
+            <div class="px-sm-2 d-flex" style="height: 80px">
+                <img class="img-rounded embed-responsive-item"
+                     src="@Model.PictureUrl" />
+            </div>
+            <div class="ps-2 align-self-center ">
+                <span class="" style="font-weight: 700">@Model.Name</span>
+            </div>
+        </div>
+
+        <div class="col-1 align-self-center">
+            <span>{@Model.Price.ToString() $}</span>
+        </div>
+        <div class="col-2 align-self-center d-flex">
+            <a href="#" class="btn">+</a>
+            <div class="align-self-center">@Model.BasketProduct.Quantity</div>
+            <a href="#" class="btn">-</a>
+        </div>
+        <div class="col-1 align-self-center">
+            <span>{ @Model.Price * @Model.BasketProduct.Quantity} $}</span>
+        </div>
+        <div class="col-2 align-self-center">
+            <a href="#"
+               class="btn close align-self-center"
+               aria-label="Close">
+                <div class="text-black display-4" aria-hidden="true">
+                    ×
+                </div>
+            </a>
+        </div>
+    </div>
+</form>
+

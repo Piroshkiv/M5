@@ -1,5 +1,6 @@
 ﻿using MVC.ViewModels.Pagination;
 
+
 namespace MVC.ViewModels.CatalogViewModels;
 
 public class IndexViewModel

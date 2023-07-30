@@ -26,7 +26,7 @@ namespace Basket.UnitTests.Services
             var testKey = "1";
             var testProductDto = new BasketProductDto() { Product = 1 };
             var testRequest = new AddProductRequest() { Id = 1 };
-            var testResponse = new AddProductResponse() { Product = new BasketProductDto { Product = 1, Quantity = 1 } };
+            var testResponse = new ProductResponse() { Product = new BasketProductDto { Product = 1, Quantity = 1 } };
 
             _cacheService.Setup(s => s.AddAsync(It.IsAny<string>(), It.IsAny<BasketProductDto>())).ReturnsAsync((Func<BasketProductDto>)null!);
 
@@ -44,7 +44,7 @@ namespace Basket.UnitTests.Services
             var testKey = "1";
             var testProductDto = new BasketProductDto() { Product = 1, Quantity = 1 };
             var testRequest = new AddProductRequest() { Id = 1 };
-            var testResponse = new AddProductResponse() { Product = new BasketProductDto { Product = 1, Quantity = 1 } };
+            var testResponse = new ProductResponse() { Product = new BasketProductDto { Product = 1, Quantity = 1 } };
 
             _cacheService.Setup(s => s.AddAsync(It.IsAny<string>(), It.IsAny<BasketProductDto>())).ReturnsAsync(testProductDto);
 
@@ -75,7 +75,7 @@ namespace Basket.UnitTests.Services
             // arrange
             var testKey = "1";
             var testBasketDto = new BasketDto() { Products = new List<BasketProductDto>(), Size = 0 };
-            var testResponse = new ProductsResponse() { Products = new List<BasketProductDto>(), Size = 0 };
+            var testResponse = new BasketResponse() { Products = new List<BasketProductDto>(), Size = 0 };
 
             _cacheService.Setup(s => s.GetAsync(It.IsAny<string>())).ReturnsAsync(testBasketDto);
 

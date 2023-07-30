@@ -32,11 +32,10 @@ public class HttpClientService : IHttpClientService
         httpMessage.RequestUri = new Uri(url);
         httpMessage.Method = method;
 
-        if (content != null)
-        {
-            httpMessage.Content =
-                new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
-        }
+    
+        httpMessage.Content =
+            new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
+
 
         var result = await client.SendAsync(httpMessage);
 

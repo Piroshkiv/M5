@@ -1,0 +1,12 @@
+﻿global using System;
+global using System.Collections.Generic;
+global using System.Threading;
+global using System.Threading.Tasks;
+global using Microsoft.EntityFrameworkCore.Storage;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Logging;
+global using Infrastructure;
+global using Infrastructure.Services;
+global using Infrastructure.Services.Interfaces;
+global using AutoMapper;
+global using Catalog.Host.Mapping;

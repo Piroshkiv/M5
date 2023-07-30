@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Basket.Host.Models.Response
 {
-    public class ProductsResponse
+    public class BasketResponse
     {
         [Required]
         public IEnumerable<BasketProductDto>? Products { get; set; }

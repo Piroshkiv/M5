@@ -1,6 +1,8 @@
 ﻿using Infrastructure.Services.Interfaces;
 using MVC.Dtos;
 using MVC.Models.Enums;
+using MVC.Models.Requests;
+using MVC.Models.Response;
 using MVC.Services.Interfaces;
 using MVC.ViewModels;
 
@@ -34,7 +36,7 @@ public class CatalogService : ICatalogService
         }
         
         var result = await _httpClient.SendAsync<Catalog, PaginatedItemsRequest<CatalogTypeFilter>>($"{_settings.Value.CatalogUrl}/items",
-           HttpMethod.Get, 
+           HttpMethod.Post, 
            new PaginatedItemsRequest<CatalogTypeFilter>()
             {
                 PageIndex = page,
@@ -48,7 +50,7 @@ public class CatalogService : ICatalogService
     public async Task<IEnumerable<SelectListItem>> GetBrands()
     {
         var result = await _httpClient.SendAsync<IEnumerable<CatalogBrand>, object?>($"{_settings.Value.CatalogUrl}/brands",
-                   HttpMethod.Get,
+                   HttpMethod.Post,
                    null);
 
         return result.Select(r => new SelectListItem() { Value = r.Id.ToString(), Text = r.Brand });
@@ -57,7 +59,7 @@ public class CatalogService : ICatalogService
     public async Task<IEnumerable<SelectListItem>> GetTypes()
     {
         var result = await _httpClient.SendAsync<IEnumerable<CatalogType>, object?>($"{_settings.Value.CatalogUrl}/types",
-                   HttpMethod.Get,
+                   HttpMethod.Post,
                    null);
 
         return result.Select(r => new SelectListItem() { Value = r.Id.ToString(), Text = r.Type });
@@ -65,10 +67,10 @@ public class CatalogService : ICatalogService
 
     public async Task<CatalogItem> GetItemById(int id)
     {
-        var result = await _httpClient.SendAsync<CatalogItem, object?>($"{_settings.Value.CatalogUrl}/itemById",
+        var result = await _httpClient.SendAsync<ItemResponse, DataRequest<int>>($"{_settings.Value.CatalogUrl}/itemById",
                    HttpMethod.Get,
-                   id);
+                   new DataRequest<int> { Value = id});
 
-        return result;
+        return new CatalogItem { Id = result.Id, PictureUrl = result.PictureUrl, Name = result.Name, AvailableStock = result.AvailableStock, Description = result.Description, Price = result.Price };
     }
 }

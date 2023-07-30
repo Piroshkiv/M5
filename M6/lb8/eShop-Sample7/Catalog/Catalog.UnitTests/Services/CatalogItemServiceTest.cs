@@ -1,4 +1,4 @@
-using System.Threading;
+using Catalog.Host.Data;
 using Catalog.Host.Data.Entities;
 
 namespace Catalog.UnitTests.Services;
@@ -8,7 +8,7 @@ public class CatalogItemServiceTest
     private readonly ICatalogItemService _catalogService;
 
     private readonly Mock<ICatalogItemRepository> _catalogItemRepository;
-    private readonly Mock<Host.Services.Interfaces.IDbContextWrapper<ApplicationDbContext>> _dbContextWrapper;
+    private readonly Mock<IDbContextWrapper<ApplicationDbContext>> _dbContextWrapper;
     private readonly Mock<ILogger<CatalogService>> _logger;
 
     private readonly CatalogItem _testItem = new CatalogItem()
@@ -25,7 +25,7 @@ public class CatalogItemServiceTest
     public CatalogItemServiceTest()
     {
         _catalogItemRepository = new Mock<ICatalogItemRepository>();
-        _dbContextWrapper = new Mock<Host.Services.Interfaces.IDbContextWrapper<ApplicationDbContext>>();
+        _dbContextWrapper = new Mock<IDbContextWrapper<ApplicationDbContext>>();
         _logger = new Mock<ILogger<CatalogService>>();
 
         var dbContextTransaction = new Mock<IDbContextTransaction>();

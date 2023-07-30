@@ -23,7 +23,7 @@ public class CatalogBrandController : ControllerBase
         _catalogBrandService = catalogBrandService;
     }
 
-    [HttpPost]
+    [HttpPut]
     [ProducesResponseType(typeof(AddDataResponse<int?>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> Add(CreateBrandRequest request)
     {
@@ -31,7 +31,7 @@ public class CatalogBrandController : ControllerBase
         return Ok(new AddDataResponse<int?>() { Id = result });
     }
 
-    [HttpPost]
+    [HttpDelete]
     public async Task<IActionResult> Delete(DeleteDataRequest request)
     {
         await _catalogBrandService.DeleteAsync(request.Id);

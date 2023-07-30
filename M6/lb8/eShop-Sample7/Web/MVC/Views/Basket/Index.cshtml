@@ -1,0 +1,33 @@
+﻿@model MVC.ViewModels.Basket.BasketViewModel
+
+@{
+    ViewData["Title"] = "Basket";
+}
+<section class="esh-catalog-hero">
+    <div class="container">
+    </div>
+</section>
+
+<div class="bg-body-tertiary p-4">
+    <div class="px-4  row justify-content-md-center">
+        <div class="col-lg-8">
+            <div class="basket">
+                <h2 class="m-2">Basket:</h2>
+                @foreach (var product in Model.Products)
+                {
+                    <div class=" row shadow m-2 p-1 rounded bg-white">
+                        <partial name="_basket" model="product" />
+                    </div>
+                }
+
+            </div>
+
+            <div class="order mt-5">
+                <h2 class="m-2 ">Order:</h2>
+                <div class=" row shadow m-2 py-2 rounded bg-white">
+                    <partial name="_order" model="@Model.Order" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

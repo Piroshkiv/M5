@@ -1,5 +1,8 @@
-﻿using MVC.Services.Interfaces;
+﻿using MVC.Models.Requests;
+using MVC.Models.Response;
+using MVC.Services.Interfaces;
 using MVC.ViewModels.Basket;
+using Newtonsoft.Json.Linq;
 
 namespace MVC.Services
 {
@@ -22,9 +25,9 @@ namespace MVC.Services
                 null);
             return result;
         }
-        public async Task<BasketProduct> GetProductById(int id)
+        public async Task<ProductResponse> GetProductById(int id)
         {
-            var result = await _httpClient.SendAsync<BasketProduct, object?>($"{_settings.Value.BasketProductUrl}/productById",
+            var result = await _httpClient.SendAsync<ProductResponse, object?>($"{_settings.Value.BasketUrl}/productById",
                 HttpMethod.Get,
                 id);
             return result;
@@ -38,23 +41,31 @@ namespace MVC.Services
         }
         public async Task<bool> Remove(int id)
         {
-            var result = await _httpClient.SendAsync<bool, object?>($"{_settings.Value.BasketProductUrl}/remove",
+            var result = await _httpClient.SendAsync<bool, DataRequest<int>>($"{_settings.Value.BasketProductUrl}/remove",
                 HttpMethod.Delete,
-                id);
+                new DataRequest<int> { Value = id });
             return result;
         }
-        public async Task<BasketProduct> Increment(int id)
+        public async Task<ProductResponse> Increment(int id)
         {
-            var result = await _httpClient.SendAsync<BasketProduct, object?>($"{_settings.Value.BasketProductUrl}/increment",
+            var result = await _httpClient.SendAsync<ProductResponse, DataRequest<int>?>($"{_settings.Value.BasketProductUrl}/increment",
                 HttpMethod.Post,
-                id);
+                new DataRequest<int> { Value = id });
             return result;
         }
-        public async Task<BasketProduct> Decrement(int id)
+        public async Task<ProductResponse> Decrement(int id)
         {
-            var result = await _httpClient.SendAsync<BasketProduct, object?>($"{_settings.Value.BasketProductUrl}/decrement",
+            var result = await _httpClient.SendAsync<ProductResponse, DataRequest<int>?>($"{_settings.Value.BasketProductUrl}/decrement",
+            HttpMethod.Post,
+                new DataRequest<int> { Value = id });
+            return result;
+        }
+
+        public async Task<ProductResponse> Add(int id)
+        {
+            var result = await _httpClient.SendAsync<ProductResponse, DataRequest<int>?>($"{_settings.Value.BasketProductUrl}/add",
                 HttpMethod.Post,
-                id);
+                new DataRequest<int> { Value = id });
             return result;
         }
     }

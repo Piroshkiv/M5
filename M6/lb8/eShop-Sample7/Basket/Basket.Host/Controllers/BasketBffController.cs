@@ -23,17 +23,8 @@ public class BasketBffController : ControllerBase
         _basketService = basketService;
     }
 
-    [HttpPost]
-    [ProducesResponseType(typeof(AddProductResponse), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Log(AddProductRequest data)
-    {
-        var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-        await _basketService.Log(basketId??"Anonym");
-        return Ok();
-    }
-
     [HttpGet]
-    [ProducesResponseType(typeof(ProductsResponse), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(BasketResponse), (int)HttpStatusCode.OK)]
     [RateLimitFilter(60, 10)]
     public async Task<IActionResult> Basket()
     {
@@ -43,8 +34,8 @@ public class BasketBffController : ControllerBase
     }
 
     [HttpGet]
-    [ProducesResponseType(typeof(ProductsResponse), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> BasketById(int id)
+    [ProducesResponseType(typeof(ProductResponse), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> ProductById(int id)
     {
         var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
         var response = await _basketService.GetProductByIdAsync(basketId!, id);

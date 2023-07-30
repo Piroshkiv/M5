@@ -1,8 +1,8 @@
 global using System;
 global using System.Collections.Generic;
+global using System.Threading;
 global using System.Threading.Tasks;
 global using AutoMapper;
-global using Catalog.Host.Data;
 global using Catalog.Host.Repositories.Interfaces;
 global using Catalog.Host.Services;
 global using Catalog.Host.Services.Interfaces;

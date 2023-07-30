@@ -6,13 +6,12 @@ namespace Basket.Host.Services.Interfaces
 {
     public interface IBasketService
     {
-        Task<AddProductResponse?> AddAsync(string key, AddProductRequest value);
-        Task<ProductsResponse> GetAsync(string key);
+        Task<ProductResponse?> AddAsync(string key, int value);
+        Task<BasketResponse> GetAsync(string key);
         Task<bool> ClearAsync(string key);
         Task<bool> RemoveProductAsync(string key, int value);
-        Task<BasketProductDto?> IncrementProductAsync(string key, int value);
-        Task<BasketProductDto?> DecrementProductAsync(string key, int value);
-        Task<BasketProductDto?> GetProductByIdAsync(string key, int id);
-        Task Log(string key);
+        Task<ProductResponse?> IncrementProductAsync(string key, int value);
+        Task<ProductResponse?> DecrementProductAsync(string key, int value);
+        Task<ProductResponse?> GetProductByIdAsync(string key, int id);
     }
 }

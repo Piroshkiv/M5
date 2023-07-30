@@ -7,6 +7,7 @@ using Catalog.Host.Services;
 using Catalog.Host.Services.Interfaces;
 using Infrastructure.Extensions;
 using Infrastructure.Filters;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var configuration = GetConfiguration();

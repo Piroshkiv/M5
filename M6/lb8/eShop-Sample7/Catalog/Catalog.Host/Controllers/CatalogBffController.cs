@@ -37,11 +37,11 @@ public class CatalogBffController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPost]
+    [HttpGet]
     [ProducesResponseType(typeof(GetItemResponse), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> ItemById(GetItemByIdRequest request)
+    public async Task<IActionResult> ItemById(GetItemByIdRequest value)
     {
-        var result = await _catalogService.GetByIdAsync(request.Id);
+        var result = await _catalogService.GetByIdAsync(value.Value);
         return Ok(result);
     }
 

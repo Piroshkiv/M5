@@ -41,6 +41,14 @@ namespace IdentityServer
                     {
                         new Scope("basket.basketproduct")
                     },
+                },
+                new ApiResource("order")
+                {
+                    Scopes = new List<Scope>
+                    {
+                        new Scope("order.orderinfo"),
+                        new Scope("order.orderproduct")
+                    },
                 }
             };
         }
@@ -56,7 +64,7 @@ namespace IdentityServer
                     AllowedGrantTypes = GrantTypes.Code,
                     ClientSecrets = {new Secret("secret".Sha256())},
                     RedirectUris = { $"{configuration["MvcUrl"]}/signin-oidc"},
-                    AllowedScopes = {"openid", "profile", "mvc"},
+                    AllowedScopes = {"openid", "profile", "mvc", "basket.basketproduct"},
                     RequirePkce = true,
                     RequireConsent = false
                 },
@@ -79,12 +87,37 @@ namespace IdentityServer
 
                     // no interactive user, use the clientid/secret for authentication
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowAccessTokensViaBrowser = true,
 
                     // secret for authentication
                     ClientSecrets =
                     {
                         new Secret("secret".Sha256())
                     },
+
+                    AllowedScopes =
+                    {
+                        "mvc", "basket.basketproduct"
+                    }
+                },
+                new Client
+                {
+                    ClientId = "order",
+
+                    // no interactive user, use the clientid/secret for authentication
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowAccessTokensViaBrowser = true,
+
+                    // secret for authentication
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+
+                    AllowedScopes =
+                    {
+                        "mvc", "order.orderinfo", "order.orderproduct"
+                    }
                 },
                 new Client
                 {
@@ -116,6 +149,23 @@ namespace IdentityServer
                         "mvc", "basket.basketproduct"
                     }
                 },
+                new Client
+                {
+                    ClientId = "orderswaggerui",
+                    ClientName = "Order Swagger UI",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris = { $"{configuration["OrderApi"]}/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { $"{configuration["OrderApi"]}/swagger/" },
+
+                    AllowedScopes =
+                    {
+                        "mvc", "order.orderinfo", "order.orderproduct"
+                    }
+                },
+
+
             };
         }
     }

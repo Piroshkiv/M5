@@ -26,11 +26,11 @@ public class BasketProductController : ControllerBase
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(AddProductResponse), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Add(AddProductRequest data)
+    [ProducesResponseType(typeof(ProductResponse), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> Add(DataRequest<int> request)
     {
         var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-        var response = await _basketService.AddAsync(basketId!, data);
+        var response = await _basketService.AddAsync(basketId!, request.Value);
         return Ok(response);
     }
 
@@ -45,28 +45,28 @@ public class BasketProductController : ControllerBase
 
     [HttpDelete]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Remove(int id)
+    public async Task<IActionResult> Remove(DataRequest<int> request)
     {
         var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-        var response = await _basketService.RemoveProductAsync(basketId!, id);
+        var response = await _basketService.RemoveProductAsync(basketId!, request.Value);
         return Ok(response);
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(ProductsResponse), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Increment(int id)
+    [ProducesResponseType(typeof(ProductResponse), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> Increment(DataRequest<int> request)
     {
         var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-        var response = await _basketService.IncrementProductAsync(basketId!, id);
+        var response = await _basketService.IncrementProductAsync(basketId!, request.Value);
         return Ok(response);
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(ProductsResponse), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> Decrement(int id)
+    [ProducesResponseType(typeof(ProductResponse), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> Decrement(DataRequest<int> request)
     {
         var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-        var response = await _basketService.DecrementProductAsync(basketId!, id);
+        var response = await _basketService.DecrementProductAsync(basketId!, request.Value);
         return Ok(response);
     }
 }

@@ -30,6 +30,51 @@ namespace Catalog.Host.Migrations
             modelBuilder.HasSequence("catalog_type_hilo")
                 .IncrementsBy(10);
 
+            modelBuilder.Entity("Catalog.Host.Data.Entities.CatalogBrand", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseHiLo(b.Property<int>("Id"), "catalog_brand_hilo");
+
+                    b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CatalogBrand", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Brand = "Azure"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Brand = ".NET"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Brand = "Visual Studio"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Brand = "SQL Server"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Brand = "Other"
+                        });
+                });
+
             modelBuilder.Entity("Catalog.Host.Data.Entities.CatalogItem", b =>
                 {
                     b.Property<int>("Id")
@@ -69,27 +114,143 @@ namespace Catalog.Host.Migrations
                     b.HasIndex("CatalogTypeId");
 
                     b.ToTable("Catalog", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AvailableStock = 100,
+                            CatalogBrandId = 2,
+                            CatalogTypeId = 2,
+                            Description = ".NET Bot Black Hoodie",
+                            Name = ".NET Bot Black Hoodie",
+                            PictureFileName = "1.png",
+                            Price = 19.5m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AvailableStock = 100,
+                            CatalogBrandId = 2,
+                            CatalogTypeId = 1,
+                            Description = ".NET Black & White Mug",
+                            Name = ".NET Black & White Mug",
+                            PictureFileName = "2.png",
+                            Price = 8.50m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AvailableStock = 100,
+                            CatalogBrandId = 5,
+                            CatalogTypeId = 2,
+                            Description = "Prism White T-Shirt",
+                            Name = "Prism White T-Shirt",
+                            PictureFileName = "3.png",
+                            Price = 12m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AvailableStock = 100,
+                            CatalogBrandId = 2,
+                            CatalogTypeId = 2,
+                            Description = ".NET Foundation T-shirt",
+                            Name = ".NET Foundation T-shirt",
+                            PictureFileName = "4.png",
+                            Price = 12m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AvailableStock = 100,
+                            CatalogBrandId = 5,
+                            CatalogTypeId = 3,
+                            Description = "Roslyn Red Sheet",
+                            Name = "Roslyn Red Sheet",
+                            PictureFileName = "5.png",
+                            Price = 8.5m
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AvailableStock = 100,
+                            CatalogBrandId = 2,
+                            CatalogTypeId = 2,
+                            Description = ".NET Blue Hoodie",
+                            Name = ".NET Blue Hoodie",
+                            PictureFileName = "6.png",
+                            Price = 12m
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AvailableStock = 100,
+                            CatalogBrandId = 5,
+                            CatalogTypeId = 2,
+                            Description = "Roslyn Red T-Shirt",
+                            Name = "Roslyn Red T-Shirt",
+                            PictureFileName = "7.png",
+                            Price = 12m
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AvailableStock = 100,
+                            CatalogBrandId = 5,
+                            CatalogTypeId = 2,
+                            Description = "Kudu Purple Hoodie",
+                            Name = "Kudu Purple Hoodie",
+                            PictureFileName = "8.png",
+                            Price = 8.5m
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AvailableStock = 100,
+                            CatalogBrandId = 5,
+                            CatalogTypeId = 1,
+                            Description = "Cup<T> White Mug",
+                            Name = "Cup<T> White Mug",
+                            PictureFileName = "9.png",
+                            Price = 12m
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AvailableStock = 100,
+                            CatalogBrandId = 2,
+                            CatalogTypeId = 3,
+                            Description = ".NET Foundation Sheet",
+                            Name = ".NET Foundation Sheet",
+                            PictureFileName = "10.png",
+                            Price = 12m
+                        },
+                        new
+                        {
+                            Id = 11,
+                            AvailableStock = 100,
+                            CatalogBrandId = 2,
+                            CatalogTypeId = 3,
+                            Description = "Cup<T> Sheet",
+                            Name = "Cup<T> Sheet",
+                            PictureFileName = "11.png",
+                            Price = 8.5m
+                        },
+                        new
+                        {
+                            Id = 12,
+                            AvailableStock = 100,
+                            CatalogBrandId = 5,
+                            CatalogTypeId = 2,
+                            Description = "Prism White TShirt",
+                            Name = "Prism White TShirt",
+                            PictureFileName = "12.png",
+                            Price = 12m
+                        });
                 });
 
-            modelBuilder.Entity("Catalog.Host.Data.Enums.CatalogBrand", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseHiLo(b.Property<int>("Id"), "catalog_brand_hilo");
-
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CatalogBrand", (string)null);
-                });
-
-            modelBuilder.Entity("Catalog.Host.Data.Enums.CatalogType", b =>
+            modelBuilder.Entity("Catalog.Host.Data.Entities.CatalogType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -105,17 +266,39 @@ namespace Catalog.Host.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CatalogType", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Type = "Mug"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Type = "T-Shirt"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Type = "Sheet"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Type = "USB Memory Stick"
+                        });
                 });
 
             modelBuilder.Entity("Catalog.Host.Data.Entities.CatalogItem", b =>
                 {
-                    b.HasOne("Catalog.Host.Data.Enums.CatalogBrand", "CatalogBrand")
+                    b.HasOne("Catalog.Host.Data.Entities.CatalogBrand", "CatalogBrand")
                         .WithMany()
                         .HasForeignKey("CatalogBrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Catalog.Host.Data.Enums.CatalogType", "CatalogType")
+                    b.HasOne("Catalog.Host.Data.Entities.CatalogType", "CatalogType")
                         .WithMany()
                         .HasForeignKey("CatalogTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
