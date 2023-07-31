@@ -1,0 +1,24 @@
+﻿@model MVC.ViewModels.Order.OrderInfo
+
+<form>
+    <div class="mb-3">
+        <label for="userName" class="form-label">FullName:</label>
+        <input type="text" class="form-control" id="userName" asp-for="@Model.FullName" required />
+        <div class="invalid-feedback">Please provide a name.</div>
+    </div>
+    <div class="mb-3">
+        <label for="userPhone" class="form-label">Phone address:</label>
+        <input type="phone" class="form-control" id="userPhone" asp-for="@Model.Phone" required />
+        <div class="invalid-feedback">Please provide a valid Phone.</div>
+    </div>
+    <div class="mb-3">
+        <label for="address" class="form-label">Address: </label>
+        <input type="text"
+               class="form-control"
+               id="address",
+               asp-for="@Model.Address"
+               required />
+        <div class="invalid-feedback">Please provide a Address.</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
